@@ -303,8 +303,14 @@ class Harvest(object):
     def delete(self, entry_id):
         return self._delete('/daily/delete/{0}'.format(entry_id))
 
+    def delete_for_user(self, entry_id, user_id):
+        return self._delete('/daily/delete/{0}?of_user={1}'.format(entry_id, user_id))
+
     def update(self, entry_id, data):
         return self._post('/daily/update/{0}'.format(entry_id), data)
+
+    def update_for_user(self, entry_id, user_id, data):
+        return self._post('/daily/update/{0}?of_user={1}'.format(entry_id, user_id), data)
 
     def _get(self, path='/', data=None):
         return self._request('GET', path, data)
